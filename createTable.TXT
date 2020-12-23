@@ -1,0 +1,30 @@
+package JDBC;
+
+import java.sql.*;
+import java.sql.DriverManager;
+
+public class JDBCTable {
+
+	public static void main(String[] args) {
+		
+		try{
+			
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/youtube", "root", "12345");
+			
+            String q = "CREATE TABLE Table1(PersonID int PRIMARY KEY AUTO_INCREMENT, FirstName varchar(255) NOT NULL, LastName varchar(255), City varchar(255))";
+            	     
+            Statement stmt = con.createStatement();
+            
+			stmt.executeUpdate(q);
+			System.out.println("table created");
+			
+			con.close();
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+
+	}
+
+}

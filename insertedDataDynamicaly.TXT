@@ -1,0 +1,48 @@
+package JDBC;
+import java.sql.*;
+import java.io.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+
+public class JDBCDynamicData {
+
+	public static void main(String[] args) {
+
+
+try{
+			
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/youtube", "root", "12345");
+			
+            String q = "INSERT INTO Table1(FirstName, LastName, City) values(?,?,?)";
+            	     
+             PreparedStatement stmt= con.prepareStatement(q);
+             
+             BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+             System.out.println("enter your first name");
+             String fName = br.readLine();
+             
+             System.out.println("enter your last name");
+             String lName = br.readLine();
+       
+             System.out.println("enter your city");
+             String city = br.readLine();
+             
+            stmt.setString(1, fName);
+            stmt.setString(2, lName);
+            stmt.setString(3, city);
+             
+             
+			stmt.executeUpdate();
+			System.out.println("inserted....");
+			
+			con.close();
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+
+	}
+
+}

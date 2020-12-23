@@ -1,0 +1,42 @@
+package JDBC;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.sql.*;
+
+public class JDBCDataFatch {
+
+	public static void main(String[] args) {
+
+
+try{
+			
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/youtube", "root", "12345");
+			
+            String q = "select * from table1";
+            	     
+             Statement stmt= con.createStatement();            
+			ResultSet rs = stmt.executeQuery(q);
+              
+			while(rs.next()){
+				int id = rs.getInt(1);
+				String fName = rs.getString(2);
+				String lName = rs.getString(3);
+				String city = rs.getString(4);
+				
+				System.out.println(id+" | "+fName+" | "+lName+" | "+city);
+				
+			}
+       
+			System.out.println("data fatched....");
+			
+			con.close();
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+
+	}
+
+}
